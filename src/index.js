@@ -3,11 +3,29 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+const initialState = {
+  name: 'John'
+};
+
+const rootReducer = (state=initialState, action) => {
+  console.log('rootReducer', action);
+  switch(action.type){
+    case 'CHANGE_DATA':
+      return Object.assign({}, state, {name:'JOHN CENA'});
+      
+  }
+  return state;
+}
+
+const store = createStore(rootReducer);
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
